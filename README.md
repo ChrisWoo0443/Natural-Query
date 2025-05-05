@@ -1,38 +1,22 @@
-# Natural-Query
+# Natural Query
 
-┌────────────────────────────────────────────┐
-│                Frontend (UI)               │
-│  - File upload (CSV/Excel)                 │
-│  - Natural language query input            │
-│  - Output area: tables & charts            │
-└────────────────────────────────────────────┘
-                  │
-                  ▼
-┌────────────────────────────────────────────┐
-│           Backend Server (FastAPI)         │
-│  - Receives query + dataset                │
-│  - Validates and preprocesses data         │
-│  - Calls AI Wrapper Service                │
-└────────────────────────────────────────────┘
-                  │
-                  ▼
-┌────────────────────────────────────────────┐
-│         AI Wrapper Service (Gemini)        │
-│  - Sends natural language + data schema    │
-│    to Gemini for code generation           │
-│  - Receives Pandas code or SQL query       │
-└────────────────────────────────────────────┘
-                  │
-                  ▼
-┌────────────────────────────────────────────┐
-│          Code Execution & Validation       │
-│  - Runs Pandas code or SQL safely          │
-│  - Sanitizes code to prevent bad input     │
-│  - Executes query on uploaded data         │
-└────────────────────────────────────────────┘
-                  │
-                  ▼
-┌───────────────────────────────────────────────┐
-│            Visualization Engine               │
-│  - Displays table or chart (Plotly/Matplotlib)│
-└───────────────────────────────────────────────┘
+An AI-powered web app that allows users to upload datasets and ask questions in natural language. The app translates these questions into Pandas code or SQL queries, executes them, and displays the results as tables or visualizations.
+
+## 🏗 System Architecture
+
+
+## 🔎 Key Features
+
+- Upload CSV or Excel datasets.
+- Ask questions in plain English.
+- AI translates queries into executable code.
+- Displays results as tables or charts.
+- Secure code execution and validation.
+
+## 🧠 Technologies
+
+- **Frontend:** Streamlit / React / HTML-CSS
+- **Backend:** FastAPI
+- **AI Wrapper:** Gemini
+- **Data Handling:** Pandas / SQL
+- **Visualization:** Plotly / Matplotlib
