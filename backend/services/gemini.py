@@ -1,4 +1,5 @@
 from google import genai
+from google.genai import types
 from dotenv import load_dotenv
 import pandas as pd
 import os
@@ -52,6 +53,8 @@ def format_prompt(query, schema, mode="pandas"):
                     Do not include any extra text only the query. 
 
                     Do not include the word python, any variables, or print statements.
+
+                    Your code should follow this format: df[df['column'] == 'ham']['column'].head(5)
                     """
     elif mode == "sql":
         prompt = f"""
@@ -71,6 +74,24 @@ def format_prompt(query, schema, mode="pandas"):
 
 
 
+'''Needed this because gemini sometimes adds python in front of result'''
+def clean_code(code):
+    """Removes language markers and extra formatting from GPT output."""
+    code = code.strip()
+
+    # Remove ``` and language markers
+    if code.startswith("```"):
+        code = code.replace("```python", "").replace("```", "").strip()
+
+    # Remove any standalone 'python' lines
+    lines = code.splitlines()
+    lines = [line for line in lines if line.strip().lower() != "python"]
+    code = "\n".join(lines).strip()
+
+    return code
+
+
+
 def generate_query_code(query: str, filename: str):
     '''
     Generate SQL code to query a dataset using Gemini API
@@ -82,6 +103,10 @@ def generate_query_code(query: str, filename: str):
 
     response = client.models.generate_content(
         model="gemini-2.0-flash",
-        contents=prompt
+        contents=prompt,
+        config=types.GenerateContentConfig(
+            temperature=0.01
+        )
     )
-    return response.text
+    return clean_code(response.text)
+
