@@ -1,7 +1,6 @@
 import pandas as pd
 import os
 
-from gemini import generate_query_code, format_prompt, extract_schema
 
 def load_dataframe(file_path):
     """
