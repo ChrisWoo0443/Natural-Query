@@ -9,6 +9,15 @@ app = FastAPI(
 )
 
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Or your frontend URL
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
 # Include your API routes
 app.include_router(upload.router, prefix="/upload", tags=["Upload"])
 app.include_router(query.router, prefix="/query", tags=["Query"])
