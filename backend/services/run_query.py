@@ -1,7 +1,7 @@
 import pandas as pd
 import os
 
-
+from gemini import generate_query_code, format_prompt, extract_schema
 
 def load_dataframe(file_path):
     """
@@ -34,3 +34,31 @@ def sanitize_code(code):
         if word in code:
             raise ValueError(f"Unsafe code detected: '{word}' found.")
 
+
+
+def execute_query_code(code, filename):
+    """
+    Runs the AI-generated code on the df.
+    """
+    file_path = os.path.join("./temp", filename)
+
+    df = load_dataframe(file_path)
+
+    sanitize_code(code)
+
+    local_vars = {'df': df}
+
+    try:
+        result = eval(code, {"__builtins__": {}}, local_vars)
+    except Exception as e:
+        result = f"Error executing code: {str(e)}"
+
+    return result
+
+
+
+'''Test Ussage'''
+# code = generate_query_code(format_prompt("Give me the first 5 spam messages", extract_schema("./temp/sms.csv")), "sms.csv")
+# result = execute_query_code(code, "sms.csv")
+# print(code)
+# print("Result:", result)
