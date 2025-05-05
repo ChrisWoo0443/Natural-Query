@@ -21,12 +21,20 @@ print(response.text)
 
 
 def extract_schema(file_path):
-    """
-    Reads the uploaded dataset and returns the schema as column names + data types
-    """
-    df = pd.read_csv(file_path)
+    """Reads the uploaded dataset (CSV or Excel) and returns the schema as column names + data types."""
+    # Detect file extension
+    ext = os.path.splitext(file_path)[1].lower()
+
+    if ext == ".csv":
+        df = pd.read_csv(file_path)
+    elif ext in [".xlsx", ".xls"]:
+        df = pd.read_excel(file_path)
+    else:
+        raise ValueError("Unsupported file format. Please upload a CSV or Excel file.")
+
     schema = {col: str(df[col].dtype) for col in df.columns}
     return schema
+
 
 
 
