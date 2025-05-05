@@ -36,17 +36,48 @@ def extract_schema(file_path):
     return schema
 
 
+def format_prompt(query, schema, mode="pandas"):
+    schema_str = "\n".join([f"{col}: {dtype}" for col, dtype in schema.items()])
+    if mode == "pandas":
+        prompt = f"""
+                    You are a Python Pandas expert. Given the following dataset schema:
+
+                    {schema_str}
+
+                    Generate Pandas code to answer the following natural language query:
+                    "{query}"
+
+                    Only return the code. Assume the dataframe has already been loaded as 'df'.
+                    """
+    elif mode == "sql":
+        prompt = f"""
+                    You are a SQL expert. Given the following dataset schema:
+
+                    {schema_str}
+
+                    Generate a SQL query to answer the following natural language query:
+                    "{query}"
+
+                    Only return the SQL query. Assume the table is called 'data'.
+                    """
+    else:
+        raise ValueError("Mode must be either 'pandas' or 'sql'.")
+
+    return prompt
+
 
 
 def generate_query_code(query: str, filename: str):
     '''
     Generate SQL code to query a dataset using Gemini API
     '''
-    response = client.models.generate_code(
+    file_path = os.path.join("./temp", filename)
+
+    schema = extract_schema(file_path)
+    prompt = format_prompt(query, schema)
+
+    response = client.models.generate_content(
         model="gemini-2.0-flash",
-        contents=f"Generate SQL code to query the {filename} dataset with the following query: {query}"
+        contents=prompt
     )
     return response.text
-
-
-
