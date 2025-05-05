@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Form
-# from services.ai_wrapper import generate_query_code
+from services.gemini import generate_query_code
 
 router = APIRouter()
 
@@ -10,4 +10,5 @@ stub
 '''
 @router.post("/")
 async def process_query(query: str = Form(...), filename: str = Form(...)):
-    pass
+    result = generate_query_code(query, filename)
+    return {"result": result}
