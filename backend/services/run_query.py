@@ -1,7 +1,6 @@
 import pandas as pd
 import os
 
-
 def load_dataframe(file_path):
     """
     Loads the dataset from CSV or Excel into a Pandas dataframe.
@@ -55,8 +54,9 @@ def execute_query_code(code, filename):
     return result
 
 
-
 '''Test Ussage'''
+# from gemini import generate_query_code, extract_schema, format_prompt
+
 # code = generate_query_code(format_prompt("Give me the first 5 spam messages", extract_schema("./temp/sms.csv")), "sms.csv")
 # result = execute_query_code(code, "sms.csv")
 # print(code)
