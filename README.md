@@ -54,6 +54,6 @@ An AI-powered web app that allows users to upload datasets and ask questions in 
 
 - **Frontend:** Streamlit / React / HTML-CSS
 - **Backend:** FastAPI
-- **AI Wrapper:** Gemini
+- **AI:** Gemini
 - **Data Handling:** Pandas / SQL
 - **Visualization:** Plotly / Matplotlib
