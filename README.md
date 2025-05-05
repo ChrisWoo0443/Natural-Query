@@ -57,3 +57,17 @@ An AI-powered web app that allows users to upload datasets and ask questions in 
 - **AI:** Gemini
 - **Data Handling:** Pandas / SQL
 - **Visualization:** Plotly / Matplotlib
+
+## Running
+- **Frontend:**
+```
+cd frontend
+python3 -m http.server 8001
+```
+
+- **Backend:**
+```
+cd backend
+uvicorn main:app --reload
+```
+
