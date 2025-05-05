@@ -48,6 +48,10 @@ def format_prompt(query, schema, mode="pandas"):
                     "{query}"
 
                     Only return the code. Assume the dataframe has already been loaded as 'df'.
+
+                    Do not include any extra text only the query. 
+
+                    Do not include the word python, any variables, or print statements.
                     """
     elif mode == "sql":
         prompt = f"""
