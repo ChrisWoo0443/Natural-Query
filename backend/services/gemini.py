@@ -10,14 +10,14 @@ client = genai.Client(api_key=geminiAPIKEY)
 
 
 
-response = client.models.generate_content(
-    model="gemini-2.0-flash", 
-    contents="Explain how AI works in a few words"
-)
-'''
-Simple example of using the Gemini API to generate content
-'''
-print(response.text)
+# response = client.models.generate_content(
+#     model="gemini-2.0-flash", 
+#     contents="Explain how AI works in a few words"
+# )
+# '''
+# Simple example of using the Gemini API to generate content
+# '''
+# print(response.text)
 
 
 def extract_schema(file_path):
@@ -47,3 +47,6 @@ def generate_query_code(query: str, filename: str):
         contents=f"Generate SQL code to query the {filename} dataset with the following query: {query}"
     )
     return response.text
+
+
+
