@@ -1,0 +1,18 @@
+body {
+    background-color: #f8f9fa;
+}
+
+h1 {
+    color: #343a40;
+}
+
+pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+#recent-queries pre {
+    background-color: #f8f9fa;
+    padding: 5px;
+    border-radius: 5px;
+}
