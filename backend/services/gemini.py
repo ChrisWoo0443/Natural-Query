@@ -1,5 +1,6 @@
 from google import genai
 from dotenv import load_dotenv
+import pandas as pd
 import os
 
 load_dotenv()
@@ -17,6 +18,15 @@ response = client.models.generate_content(
 Simple example of using the Gemini API to generate content
 '''
 print(response.text)
+
+
+def extract_schema(file_path):
+    """
+    Reads the uploaded dataset and returns the schema as column names + data types
+    """
+    df = pd.read_csv(file_path)
+    schema = {col: str(df[col].dtype) for col in df.columns}
+    return schema
 
 
 
