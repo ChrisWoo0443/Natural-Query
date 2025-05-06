@@ -83,6 +83,8 @@ def clean_code(code):
     # Remove ``` and language markers
     if code.startswith("```"):
         code = code.replace("```python", "").replace("```", "").strip()
+        code = code.replace("```pandas", "").replace("```", "").strip()
+
 
     # Remove any standalone 'python' lines
     lines = code.splitlines()
