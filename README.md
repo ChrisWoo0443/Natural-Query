@@ -71,3 +71,7 @@ cd backend
 uvicorn main:app --reload
 ```
 
+- **Run All Together:**
+```
+./run.sh
+```
